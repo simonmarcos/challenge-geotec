@@ -1,10 +1,11 @@
 import Recipes, { IRecipes } from "../models/Recipes";
+import { Request, Response } from "express";
 
-export const findAll = async (req: any, res: any) => {
+export const findAll = async (req: Request, res: Response) => {
   res.send("ENTROOO");
 };
 
-export const save = async (req: any, res: any) => {
+export const save = async (req: Request, res: Response) => {
   const recipe: IRecipes = new Recipes(req.body);
 
   recipe
