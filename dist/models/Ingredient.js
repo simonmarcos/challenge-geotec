@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const recipesSchema = new mongoose_1.Schema({
+const ingredientsSchema = new mongoose_1.Schema({
     id: {
         type: Number,
         unique: true,
         require: true,
     },
-    title: {
+    name: {
         type: String,
         require: true,
     },
@@ -16,4 +16,4 @@ const recipesSchema = new mongoose_1.Schema({
         require: true,
     },
 });
-exports.default = (0, mongoose_1.model)("Recipes", recipesSchema);
+exports.default = (0, mongoose_1.model)("Ingredient", ingredientsSchema);

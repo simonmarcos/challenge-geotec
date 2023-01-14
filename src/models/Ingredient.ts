@@ -1,25 +1,25 @@
 import { model, Schema, Document } from "mongoose";
 
-export interface IRecipes extends Document {
+export interface IIngredient extends Document {
   id: number;
   title: string;
   image: string;
 }
 
-const recipesSchema = new Schema({
+const ingredientsSchema = new Schema({
   id: {
     type: Number,
     unique: true,
     require: true,
   },
-  title: {
+  name: {
     type: String,
     require: true,
   },
   image: {
     type: String,
     require: true,
-  }, 
+  },
 });
 
-export default model<IRecipes>("Recipes", recipesSchema);
+export default model<IIngredient>("Ingredient", ingredientsSchema);
