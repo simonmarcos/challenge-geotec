@@ -1,4 +1,5 @@
 import { model, Schema, Document } from "mongoose";
+const yup = require("yup");
 
 export interface IRecipes extends Document {
   id: number;
@@ -19,7 +20,12 @@ const recipesSchema = new Schema({
   image: {
     type: String,
     require: true,
-  }, 
+  },
+});
+
+export const recipesValidationSchema = yup.object().shape({
+  title: yup.string().required(),
+  image: yup.string().required(),
 });
 
 export default model<IRecipes>("Recipes", recipesSchema);
