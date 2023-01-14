@@ -9,12 +9,12 @@ const router = express.Router();
 
 app.set("port", process.env.PORT || 3000);
 
-app.use("/api", router, recipesRoutes);
-
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use("/api", router, recipesRoutes);
 
 app.get("/health", (req, res) => {
   res.send("THE API IS UP");
