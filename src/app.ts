@@ -2,9 +2,14 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+import recipesRoutes from "./routes/recipes.routes";
+
 const app = express();
+const router = express.Router();
 
 app.set("port", process.env.PORT || 3000);
+
+app.use("/api", router, recipesRoutes);
 
 app.use(morgan("dev"));
 app.use(cors());
