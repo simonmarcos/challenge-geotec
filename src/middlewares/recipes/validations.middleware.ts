@@ -29,7 +29,6 @@ export const validateIfExistParamTitle = async (
     await schema.validate(req.query.title);
     next();
   } catch (error) {
-    console.warn("ENTRO AQUI ", error);
     res.status(400).send({ error: "Params Title is required." });
   }
 };
