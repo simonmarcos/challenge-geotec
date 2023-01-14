@@ -8,9 +8,8 @@ export const findAll = async (req: Request, res: Response) => {
 
 export const findOneByTitle = async (req: Request, res: Response) => {
   try {
-    const title = req.query.title;
     const recipeResponse: IRecipes | null = await Recipes.findOne({
-      title: title,
+      title: req.query.title,
     });
 
     if (recipeResponse) {
