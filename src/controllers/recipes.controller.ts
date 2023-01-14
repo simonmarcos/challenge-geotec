@@ -17,6 +17,8 @@ export const findOneByTitle = async (req: Request, res: Response) => {
     } else {
       res.status(204).json();
     }
+
+    return recipeResponse;
   } catch (error) {
     res.status(400).json({ error });
   }

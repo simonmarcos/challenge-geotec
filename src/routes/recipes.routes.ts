@@ -4,6 +4,7 @@ const router = Router();
 import * as recipesController from "../controllers/recipes.controller";
 import {
   validateIfExistParamTitle,
+  validateIfExistRecipeInDB,
   validateRecipesData,
 } from "../middlewares/recipes/validations.middleware";
 
@@ -13,7 +14,12 @@ router.get(
   validateIfExistParamTitle,
   recipesController.findOneByTitle
 );
-router.post("/recipes/save", validateRecipesData, recipesController.save);
+router.post(
+  "/recipes/save",
+  validateRecipesData,
+  validateIfExistRecipeInDB,
+  recipesController.save
+);
 router.patch("/recipes/:id/partialUpdate", recipesController.partialUpdate);
 router.delete("/recipes/:id/delete", recipesController.deleteOne);
 
