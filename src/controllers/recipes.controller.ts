@@ -18,18 +18,16 @@ export const save = async (req: Request, res: Response) => {
 };
 
 export const partialUpdate = async (req: Request, res: Response) => {
-  Recipes.findByIdAndUpdate(
-    { _id: req.params.id },
-    req.body,
-    { new: true },
-    (error, response) => {
-      if (response) {
-        res.status(200).json(response);
-      } else {
-        res.status(400).json({ error });
-      }
-    }
-  );
+  try {
+    const recipesUpdated = await Recipes.findByIdAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(recipesUpdated);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 };
 
 export const deleteOne = async (req: Request, res: Response) => {
