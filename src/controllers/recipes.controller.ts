@@ -1,5 +1,5 @@
-import Recipes, { IRecipes } from "../models/Recipes";
 import { Request, Response } from "express";
+import Recipes, { IRecipes } from "../models/Recipes";
 
 export const findAll = async (req: Request, res: Response) => {
   const recipesResponse = await Recipes.find();
@@ -17,8 +17,22 @@ export const save = async (req: Request, res: Response) => {
   }
 };
 
+export const partialUpdate = async (req: Request, res: Response) => {
+  Recipes.findByIdAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true },
+    (error, response) => {
+      if (response) {
+        res.status(200).json(response);
+      } else {
+        res.status(400).json({ error });
+      }
+    }
+  );
+};
+
 export const deleteOne = async (req: Request, res: Response) => {
-  const recipeId = req.params.id;
-  await Recipes.findByIdAndRemove(recipeId);
+  await Recipes.findByIdAndRemove(req.params.id);
   res.status(204).json();
 };
