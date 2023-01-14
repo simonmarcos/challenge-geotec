@@ -6,6 +6,23 @@ export const findAll = async (req: Request, res: Response) => {
   res.json(recipesResponse);
 };
 
+export const findOneByTitle = async (req: Request, res: Response) => {
+  try {
+    const title = req.query.title;
+    const recipeResponse: IRecipes | null = await Recipes.findOne({
+      title: title,
+    });
+
+    if (recipeResponse) {
+      res.status(200).json(recipeResponse);
+    } else {
+      res.status(204).json();
+    }
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
 export const save = async (req: Request, res: Response) => {
   const recipe: IRecipes = new Recipes(req.body);
 
