@@ -6,5 +6,6 @@ import validateRecipesData from "../middlewares/recipes/validateRecipesData.midd
 
 router.get("/recipes/findAll", recipesController.findAll);
 router.post("/recipes/save", validateRecipesData, recipesController.save);
+router.delete("/recipes/:id/delete", recipesController.deleteOne);
 
 export default router;

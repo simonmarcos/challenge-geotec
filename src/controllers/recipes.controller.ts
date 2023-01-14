@@ -13,7 +13,12 @@ export const save = async (req: Request, res: Response) => {
     const recipesSaved = await recipe.save();
     res.status(201).json(recipesSaved);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error });
   }
+};
+
+export const deleteOne = async (req: Request, res: Response) => {
+  const recipeId = req.params.id;
+  await Recipes.findByIdAndRemove(recipeId);
+  res.status(204).json();
 };
