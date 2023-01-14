@@ -1,18 +1,11 @@
-import { model, Schema, Document } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 const yup = require("yup");
-
 export interface IRecipes extends Document {
-  id: number;
   title: string;
   image: string;
 }
 
 const recipesSchema = new Schema({
-  id: {
-    type: Number,
-    unique: true,
-    require: true,
-  },
   title: {
     type: String,
     require: true,
