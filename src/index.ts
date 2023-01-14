@@ -1,4 +1,5 @@
 import app from "./app";
+import "./database";
 
 const SERVER_PORT = app.get("port");
 
