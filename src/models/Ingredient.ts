@@ -2,7 +2,7 @@ import { model, Schema, Document } from "mongoose";
 
 export interface IIngredient extends Document {
   id: number;
-  title: string;
+  name: string;
   image: string;
 }
 
