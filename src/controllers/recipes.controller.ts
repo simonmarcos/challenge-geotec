@@ -1,22 +1,20 @@
 import { Request, Response } from "express";
-import { PAGINATION_OPTIONS } from "../config/config";
-import { Recipes, IRecipes } from "../models/Recipes";
+import { IRecipes, Recipes } from "../models/Recipes";
+import { RecipeService } from "../service/recipes.service";
+
+const recipeService = new RecipeService();
 
 export const findAll = async (req: Request, res: Response) => {
-  const page = req.query.page || 1;
+  const page: number = Number(req.query.page);
 
-  const recipesResponse = await Recipes.paginate(
-    {},
-    { ...PAGINATION_OPTIONS, page }
-  );
+  const recipesResponse = await recipeService.findAll(page);
   res.json(recipesResponse);
 };
 
 export const findOneByTitle = async (req: Request, res: Response) => {
   try {
-    const recipeResponse: IRecipes | null = await Recipes.findOne({
-      title: req.query.title,
-    });
+    const title: string = String(req.query.title);
+    const recipeResponse: IRecipes = await recipeService.findOneByTitle(title);
 
     if (recipeResponse) {
       res.status(200).json(recipeResponse);
@@ -31,10 +29,9 @@ export const findOneByTitle = async (req: Request, res: Response) => {
 };
 
 export const save = async (req: Request, res: Response) => {
-  const recipe: IRecipes = new Recipes(req.body);
-
   try {
-    const recipesSaved = await recipe.save();
+    const recipe: IRecipes = new Recipes(req.body);
+    const recipesSaved = await recipeService.save(recipe);
     res.status(201).json(recipesSaved);
   } catch (error) {
     res.status(400).json({ error });
@@ -43,10 +40,9 @@ export const save = async (req: Request, res: Response) => {
 
 export const partialUpdate = async (req: Request, res: Response) => {
   try {
-    const recipesUpdated = await Recipes.findByIdAndUpdate(
-      { _id: req.params.id },
-      req.body,
-      { new: true }
+    const recipesUpdated = await recipeService.partialupdate(
+      req.params.id,
+      req.body
     );
     res.status(200).json(recipesUpdated);
   } catch (error) {
@@ -55,6 +51,6 @@ export const partialUpdate = async (req: Request, res: Response) => {
 };
 
 export const deleteOne = async (req: Request, res: Response) => {
-  await Recipes.findByIdAndRemove(req.params.id);
+  await recipeService.deleteOne(req.params.id);
   res.status(204).json();
 };
