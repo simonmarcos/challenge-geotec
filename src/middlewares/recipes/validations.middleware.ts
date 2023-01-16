@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import Recipes, {
+import {
+  Recipes,
   IRecipes,
-  recipesValidationSchema
+  recipesValidationSchema,
 } from "../../models/Recipes";
 
 const yup = require("yup");

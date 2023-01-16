@@ -6,3 +6,8 @@ export default {
     PASSWORD: process.env.MONGODB_PASSWORD || "admin",
   },
 };
+
+export const PAGINATION_OPTIONS = {
+  page: 1,
+  limit: 100,
+};

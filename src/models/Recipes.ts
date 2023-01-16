@@ -1,4 +1,7 @@
 import { Document, model, Schema } from "mongoose";
+
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 const yup = require("yup");
 export interface IRecipes extends Document {
   title: string;
@@ -21,4 +24,6 @@ export const recipesValidationSchema = yup.object().shape({
   image: yup.string().required(),
 });
 
-export default model<IRecipes>("Recipes", recipesSchema);
+recipesSchema.plugin(mongoosePaginate);
+
+export const Recipes = mongoose.model("Recipes", recipesSchema);

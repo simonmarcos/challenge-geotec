@@ -1,8 +1,14 @@
 import { Request, Response } from "express";
-import Recipes, { IRecipes } from "../models/Recipes";
+import { PAGINATION_OPTIONS } from "../config/config";
+import { Recipes, IRecipes } from "../models/Recipes";
 
 export const findAll = async (req: Request, res: Response) => {
-  const recipesResponse = await Recipes.find();
+  const page = req.query.page || 1;
+
+  const recipesResponse = await Recipes.paginate(
+    {},
+    { ...PAGINATION_OPTIONS, page }
+  );
   res.json(recipesResponse);
 };
 
