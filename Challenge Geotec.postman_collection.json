@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "65250467-f02a-4d73-9dae-2644ef2608ac",
+		"name": "Challenge Geotec",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recipes",
+			"item": [
+				{
+					"name": "https://api.spoonacular.com/recipes/complexSearch?apiKey=0692bc1101dd4191ba6d8dc1129beb55&number=100",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spoonacular.com/recipes/complexSearch?apiKey=0692bc1101dd4191ba6d8dc1129beb55&number=100",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spoonacular",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"complexSearch"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "0692bc1101dd4191ba6d8dc1129beb55"
+								},
+								{
+									"key": "number",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Recipe in our DB",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Humita en chala\",\r\n    \"image\": \"https://www.lapaulina.com.ar/-/media/ecosystem/divisions/argentina/sites/la-paulina/la-paulina-images/recipes/diseo-sin-ttulo-(19).ashx?h=512&w=1100&revision=e9261642-1e1a-452c-bcbf-0a35b96eca65&hash=EACF263B941DA9A18C8D35D887E6F096\",\r\n    \"imageType\": \"jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/recipes/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"recipes",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial update Recipes",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"https://resizer.glanacion.com/resizer/1c_ZnlJId2viMN9XSz92U4x7brc=/768x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/64QJ4Q4NLZCERNGU22MPWDJMUI.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/recipes/63c8bda8f2d083cacd474575/partialUpdate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"recipes",
+								"63c8bda8f2d083cacd474575",
+								"partialUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ingredientes to Spoonacular",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spoonacular.com/food/ingredients/search?query=Cauliflower&number=100&apiKey=0692bc1101dd4191ba6d8dc1129beb55",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spoonacular",
+								"com"
+							],
+							"path": [
+								"food",
+								"ingredients",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Cauliflower"
+								},
+								{
+									"key": "number",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "calories",
+									"disabled": true
+								},
+								{
+									"key": "sortDirection",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "apiKey",
+									"value": "0692bc1101dd4191ba6d8dc1129beb55"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recipes From our API and external API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/recipes/findAll?limit=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"recipes",
+								"findAll"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredients",
+			"item": [
+				{
+					"name": "Save Ingredients in our DB",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"banana chips\",\r\n    \"image\": \"https://www.cookwithkushi.com/wp-content/uploads/2019/09/IMG_2038_.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ingredients/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredients",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ingredients from our DB",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/ingredients/findAll?limit=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredients",
+								"findAll"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partial update Ingredients",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"banana chip\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ingredients/63c8e361f6346580d46ea414/partialUpdate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredients",
+								"63c8e361f6346580d46ea414",
+								"partialUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ingredients by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"banana chip\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ingredients/63c8e361f6346580d46ea414/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ingredients",
+								"63c8e361f6346580d46ea414",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
