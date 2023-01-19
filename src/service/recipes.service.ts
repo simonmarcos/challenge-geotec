@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import { PAGINATION_OPTIONS } from "../config/config";
+import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
 import { IRecipesDTO } from "../models/dto/RecipesDTO";
 import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
@@ -6,7 +8,7 @@ import {
   IRecipesSpoonacularDTO,
   IRecipesSpoonacularResponse,
 } from "../spoonacular/model/RecipesSpoonacular";
-import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSpoonacular.service";
+import { RecipesSpoonacularService } from "../spoonacular/service/recipesSpoonacular.service";
 import { convertListRecipesResponseDataToDTO } from "../spoonacular/utils/convertData";
 
 export class RecipeService {
@@ -65,7 +67,10 @@ export class RecipeService {
 
       return convertListRecipesResponseDataToDTO(recipesReponseFromSpoonacular);
     } catch (error) {
-      throw new Error("Spoonacular API error");
+      if (error instanceof SpoonacularError) {
+        throw error as SpoonacularError;
+      }
+      throw new Error("Error");
     }
   };
 }

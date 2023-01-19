@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
 import { IRecipes, Recipes } from "../models/Recipes";
 import { RecipeService } from "../service/recipes.service";
 
@@ -11,6 +12,10 @@ export const findAll = async (req: Request, res: Response) => {
     const recipesResponse = await recipeService.findAll(limit);
     res.json(recipesResponse);
   } catch (error) {
+    if (error instanceof SpoonacularError) {
+      const spoonacularError: SpoonacularError = error as SpoonacularError;
+      res.status(spoonacularError.getStatus()).json(spoonacularError.message);
+    }
     res.status(500).json("Error");
   }
 };
