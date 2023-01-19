@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 export default {
   DB: {
     URI: process.env.MONGODB_URI || "mongodb://localhost/challenge-geotec",
