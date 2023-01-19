@@ -5,7 +5,7 @@ import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
 import {
   IRecipesSpoonacularDTO,
-  IRecipesSpoonacularResponse
+  IRecipesSpoonacularResponse,
 } from "../spoonacular/model/RecipesSpoonacular";
 import { RecipesSpoonacularService } from "../spoonacular/service/recipesSpoonacular.service";
 import { convertListRecipesResponseDataToDTO } from "../spoonacular/utils/convertData";

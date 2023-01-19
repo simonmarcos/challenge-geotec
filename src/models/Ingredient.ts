@@ -1,5 +1,8 @@
-import { model, Schema, Document } from "mongoose";
+import { Document, Schema } from "mongoose";
 
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const yup = require("yup");
 export interface IIngredient extends Document {
   id: number;
   name: string;
@@ -22,4 +25,11 @@ const ingredientsSchema = new Schema({
   },
 });
 
-export default model<IIngredient>("Ingredient", ingredientsSchema);
+export const ingredientsValidationSchema = yup.object().shape({
+  name: yup.string().required(),
+  image: yup.string().required(),
+});
+
+ingredientsSchema.plugin(mongoosePaginate);
+
+export const Ingredient = mongoose.model("Recipes", ingredientsSchema);

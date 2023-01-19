@@ -1,4 +1,4 @@
-import { Document, model, Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
 
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
