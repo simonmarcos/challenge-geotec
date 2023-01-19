@@ -15,8 +15,9 @@ export const findAll = async (req: Request, res: Response) => {
     if (error instanceof SpoonacularError) {
       const spoonacularError: SpoonacularError = error as SpoonacularError;
       res.status(spoonacularError.getStatus()).json(spoonacularError.message);
+    } else {
+      res.status(500).json("Error");
     }
-    res.status(500).json("Error");
   }
 };
 

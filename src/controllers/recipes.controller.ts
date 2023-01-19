@@ -15,8 +15,9 @@ export const findAll = async (req: Request, res: Response) => {
     if (error instanceof SpoonacularError) {
       const spoonacularError: SpoonacularError = error as SpoonacularError;
       res.status(spoonacularError.getStatus()).json(spoonacularError.message);
+    } else {
+      res.status(500).json("Error");
     }
-    res.status(500).json("Error");
   }
 };
 
@@ -33,7 +34,12 @@ export const findOneByTitle = async (req: Request, res: Response) => {
 
     return recipeResponse;
   } catch (error) {
-    res.status(400).json({ error });
+    if (error instanceof Error) {
+      const err = error as Error;
+      res.status(404).json({ error: err.message });
+    } else {
+      res.status(500).json("Error");
+    }
   }
 };
 
@@ -43,7 +49,12 @@ export const save = async (req: Request, res: Response) => {
     const recipesSaved = await recipeService.save(recipe);
     res.status(201).json(recipesSaved);
   } catch (error) {
-    res.status(400).json({ error });
+    if (error instanceof Error) {
+      const err = error as Error;
+      res.status(412).json({ error: err.message });
+    } else {
+      res.status(500).json("Error");
+    }
   }
 };
 
@@ -55,7 +66,12 @@ export const partialUpdate = async (req: Request, res: Response) => {
     );
     res.status(200).json(recipesUpdated);
   } catch (error) {
-    res.status(400).json({ error });
+    if (error instanceof Error) {
+      const err = error as Error;
+      res.status(404).json({ error: err.message });
+    } else {
+      res.status(500).json("Error");
+    }
   }
 };
 
