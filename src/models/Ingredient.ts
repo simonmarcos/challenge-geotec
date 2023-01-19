@@ -32,4 +32,4 @@ export const ingredientsValidationSchema = yup.object().shape({
 
 ingredientsSchema.plugin(mongoosePaginate);
 
-export const Ingredient = mongoose.model("Recipes", ingredientsSchema);
+export const Ingredient = mongoose.model("Ingredients", ingredientsSchema);
