@@ -5,9 +5,10 @@ import cors from "cors";
 import recipesRoutes from "./routes/recipes.routes";
 import ingredientsRoutes from "./routes/ingredients.routes";
 
+require("dotenv").config();
+
 const app = express();
 const router = express.Router();
-
 app.set("port", process.env.PORT || 3000);
 
 app.use(morgan("dev"));
