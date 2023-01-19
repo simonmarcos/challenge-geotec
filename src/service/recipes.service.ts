@@ -1,39 +1,38 @@
 import { PAGINATION_OPTIONS } from "../config/config";
+import { IRecipesDTO } from "../models/dto/RecipesDTO";
 import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
-import { IRecipesSpoonacularDTO } from "../spoonacular/model/RecipesSpoonacular";
 import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSpoonacular.service";
 
 export class RecipeService {
   findAll = async (limit: number) => {
-    const finalResponse = [];
-
     const defaultValueLimit: number = limit ? limit : PAGINATION_OPTIONS.limit;
 
-    const recipesResponseFromOurDB: IPaginateResult<IRecipes> =
+    const recipesResponseFromOurDB: IPaginateResult<IRecipesDTO> =
       await Recipes.paginate(
         {},
         { ...PAGINATION_OPTIONS, limit: defaultValueLimit }
       );
 
-    finalResponse.push(recipesResponseFromOurDB.docs);
     const numberOfRecipes: number = recipesResponseFromOurDB.totalDocs;
 
     if (numberOfRecipes < 100) {
       try {
         const recipesSpoonacularService = new RecipesSpoonacularService();
-        const recipesReponseFromSpoonacular =
+        const recipesReponseFromSpoonacular: IRecipesDTO[] =
           await recipesSpoonacularService.getRecipes(
             defaultValueLimit - numberOfRecipes
           );
 
-        finalResponse.push(recipesReponseFromSpoonacular);
+        recipesResponseFromOurDB.docs = recipesResponseFromOurDB.docs.concat(
+          recipesReponseFromSpoonacular
+        );
       } catch (error) {
         console.warn("EASD ", error);
       }
     }
 
-    return finalResponse;
+    return { ...recipesResponseFromOurDB, totalDocs: 100 };
   };
 
   findOneByTitle = async (title: string = ""): Promise<IRecipes> => {

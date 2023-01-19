@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IRecipesDTO } from "../../models/dto/RecipesDTO";
 import {
   IRecipesSpoonacularDTO,
   IRecipesSpoonacularResponseDTO,
@@ -6,7 +7,7 @@ import {
 import { builApiUrlWithEntity } from "../utils";
 
 export class RecipesSpoonacularService {
-  getRecipes = async (size: number): Promise<IRecipesSpoonacularDTO[]> => {
+  getRecipes = async (size: number): Promise<IRecipesDTO[]> => {
     try {
       const FINAL_URL = `${builApiUrlWithEntity("recipes")}&number=${size}`;
 

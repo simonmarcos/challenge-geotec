@@ -11,4 +11,5 @@ export interface IRecipesSpoonacularDTO {
   _id: number;
   title: string;
   image: string;
+  imageType: string;
 }

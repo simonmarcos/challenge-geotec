@@ -17,11 +17,16 @@ const recipesSchema = new Schema({
     type: String,
     require: true,
   },
+  imageType: {
+    type: String,
+    require: true,
+  },
 });
 
 export const recipesValidationSchema = yup.object().shape({
   title: yup.string().required(),
   image: yup.string().required(),
+  imageType: yup.string().required(),
 });
 
 recipesSchema.plugin(mongoosePaginate);
