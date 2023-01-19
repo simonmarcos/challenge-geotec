@@ -1,16 +1,16 @@
-import { PAGINATION_OPTIONS } from "../config/config";
-import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
-import { IRecipesDTO } from "../models/dto/RecipesDTO";
-import { IPaginateResult } from "../models/Paginate";
-import { IRecipes, Recipes } from "../models/Recipes";
+import { PAGINATION_OPTIONS } from "../../config/config";
+import { SpoonacularError } from "../../exceptions/SpoonacularExceptions";
+import { IRecipesDTO } from "../../models/dto/RecipesDTO";
+import { IPaginateResult } from "../../models/Paginate";
+import { IRecipes, Recipes } from "../../models/Recipes";
 import {
   IRecipesSpoonacularDTO,
   IRecipesSpoonacularResponse,
-} from "../spoonacular/model/RecipesSpoonacular";
-import { RecipesSpoonacularService } from "../spoonacular/service/recipesSpoonacular.service";
-import { convertListRecipesResponseDataToDTO } from "../spoonacular/utils/convertData";
+} from "../../spoonacular/model/RecipesSpoonacular";
+import { RecipesSpoonacularService } from "../../spoonacular/service/RecipesSpoonacularService";
+import { convertListRecipesResponseDataToDTO } from "../../spoonacular/utils/convertData";
 
-export class RecipeService {
+export class RecipeServiceImpl implements RecipeServiceImpl {
   findAll = async (limit: number) => {
     const defaultValueLimit: number = limit ? limit : PAGINATION_OPTIONS.limit;
 
@@ -43,7 +43,7 @@ export class RecipeService {
 
   save = async (recipe: IRecipes) => {
     const recipeByTitleResponse = await this.findOneByTitle(recipe.title);
-    
+
     if (recipeByTitleResponse) {
       throw new Error("The Recipe already exist in db.");
     }

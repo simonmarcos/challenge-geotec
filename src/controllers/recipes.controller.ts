@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
 import { IRecipes, Recipes } from "../models/Recipes";
-import { RecipeService } from "../service/recipes.service";
+import { RecipeServiceImpl } from "../service/impl/RecipesServiceImpl";
 
-const recipeService = new RecipeService();
+const recipeService = new RecipeServiceImpl();
 
 export const findAll = async (req: Request, res: Response) => {
   const limit: number = Number(req.query.limit);

@@ -1,8 +1,9 @@
-import { PAGINATION_OPTIONS } from "../config/config";
-import { IIngredient, Ingredient } from "../models/Ingredient";
+import { PAGINATION_OPTIONS } from "../../config/config";
+import { IIngredient, Ingredient } from "../../models/Ingredient";
+import { IPaginateResult } from "../../models/Paginate";
 
-export class IngredientsService {
-  findAll = async (limit: number) => {
+export class IngredientsService implements IngredientsService {
+  findAll = async (limit: number): Promise<IPaginateResult<IIngredient>> => {
     const defaultValueLimit: number = limit ? limit : PAGINATION_OPTIONS.limit;
 
     return await Ingredient.paginate(

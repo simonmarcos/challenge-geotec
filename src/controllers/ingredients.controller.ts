@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
 import { IIngredient, Ingredient } from "../models/Ingredient";
-import { IngredientsService } from "../service/ingredients.service";
+import { IngredientsService } from "../service/impl/IngredientsServiceImpl";
 
 const ingredientService = new IngredientsService();
 
