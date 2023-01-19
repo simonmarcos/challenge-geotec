@@ -11,6 +11,12 @@ export class IngredientsService {
     );
   };
 
+  findOneByTitle = async (title: string = ""): Promise<IIngredient> => {
+    return await Ingredient.findOne({
+      title: title,
+    });
+  };
+
   save = async (Ingredient: IIngredient) => {
     return await Ingredient.save();
   };

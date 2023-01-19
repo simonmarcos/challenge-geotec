@@ -4,6 +4,7 @@ import {
   IRecipes,
   recipesValidationSchema,
 } from "../../models/Recipes";
+import { RecipeService } from "../../service/recipes.service";
 
 const yup = require("yup");
 
@@ -13,9 +14,8 @@ export const validateIfExistRecipeInDB = async (
   next: NextFunction
 ) => {
   try {
-    const response: IRecipes | null = await Recipes.findOne({
-      title: req.body.title,
-    });
+    const recipeService = new RecipeService();
+    const response: IRecipes = await recipeService.findOneByTitle(req.body.title);
 
     if (response) {
       throw new Error("The Recipe already exist in db.");
