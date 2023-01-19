@@ -2,7 +2,12 @@ import { PAGINATION_OPTIONS } from "../config/config";
 import { IRecipesDTO } from "../models/dto/RecipesDTO";
 import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
+import {
+  IRecipesSpoonacularDTO,
+  IRecipesSpoonacularResponse,
+} from "../spoonacular/model/RecipesSpoonacular";
 import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSpoonacular.service";
+import { convertListRecipesResponseDataToDTO } from "../spoonacular/utils/convertData";
 
 export class RecipeService {
   findAll = async (limit: number) => {
@@ -14,25 +19,19 @@ export class RecipeService {
         { ...PAGINATION_OPTIONS, limit: defaultValueLimit }
       );
 
-    const numberOfRecipes: number = recipesResponseFromOurDB.totalDocs;
+    const numberOfRecipesExisting: number = recipesResponseFromOurDB.totalDocs;
 
-    if (numberOfRecipes < 100) {
-      try {
-        const recipesSpoonacularService = new RecipesSpoonacularService();
-        const recipesReponseFromSpoonacular: IRecipesDTO[] =
-          await recipesSpoonacularService.getRecipes(
-            defaultValueLimit - numberOfRecipes
-          );
-
-        recipesResponseFromOurDB.docs = recipesResponseFromOurDB.docs.concat(
-          recipesReponseFromSpoonacular
+    if (recipesResponseFromOurDB.totalDocs < defaultValueLimit) {
+      const recipesResponseDTO: IRecipesSpoonacularDTO[] =
+        await this.findRecipesFromSpoonacularService(
+          defaultValueLimit - numberOfRecipesExisting
         );
-      } catch (error) {
-        console.warn("EASD ", error);
-      }
+
+      recipesResponseFromOurDB.docs =
+        recipesResponseFromOurDB.docs.concat(recipesResponseDTO);
     }
 
-    return { ...recipesResponseFromOurDB, totalDocs: 100 };
+    return { ...recipesResponseFromOurDB, totalDocs: defaultValueLimit };
   };
 
   findOneByTitle = async (title: string = ""): Promise<IRecipes> => {
@@ -53,5 +52,20 @@ export class RecipeService {
 
   deleteOne = async (recipeId: string) => {
     await Recipes.findByIdAndRemove(recipeId);
+  };
+
+  private findRecipesFromSpoonacularService = async (
+    size: number
+  ): Promise<IRecipesSpoonacularDTO[]> => {
+    try {
+      const recipesSpoonacularService = new RecipesSpoonacularService();
+
+      const recipesReponseFromSpoonacular: IRecipesSpoonacularResponse[] =
+        await recipesSpoonacularService.getRecipes(size);
+
+      return convertListRecipesResponseDataToDTO(recipesReponseFromSpoonacular);
+    } catch (error) {
+      throw new Error("Spoonacular API error");
+    }
   };
 }

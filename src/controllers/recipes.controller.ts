@@ -7,8 +7,12 @@ const recipeService = new RecipeService();
 export const findAll = async (req: Request, res: Response) => {
   const limit: number = Number(req.query.limit);
 
-  const recipesResponse = await recipeService.findAll(limit);
-  res.json(recipesResponse);
+  try {
+    const recipesResponse = await recipeService.findAll(limit);
+    res.json(recipesResponse);
+  } catch (error) {
+    res.status(500).json("Error");
+  }
 };
 
 export const findOneByTitle = async (req: Request, res: Response) => {
