@@ -2,16 +2,16 @@
 
 This is a Node.js application that exposes an API created with Express, Axios, and Mongoose. The API interacts with an external API called Spoonacular to search for recipes and ingredients. It also has a MongoDB database to store recipes and ingredients.
 
-##Getting Started
+## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-##Prerequisites
+## Prerequisites
 
 - Node.js
 - MongoDB
 - A Spoonacular API key (https://spoonacular.com/food-api)
 
-##Installing
+## Installing
 
 - Clone the repository
 - git clone by ssh: git@github.com:simonmarcos/challenge-geotec.git
@@ -22,7 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Create a .env file in the root of the project and add your Spoonacular API key as **SPOONACULAR_API_KEY=YOUR_API_KEY**
   **SPOONACULAR_API_KEY=URI**
 
-##Start the server
+## Start the server
 
 - **npm run dev**
 - The server should now be running on http://localhost:3000
