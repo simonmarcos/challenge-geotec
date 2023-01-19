@@ -1,31 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import {
-  Recipes,
-  IRecipes,
-  recipesValidationSchema,
-} from "../../models/Recipes";
-import { RecipeService } from "../../service/recipes.service";
+import { recipesValidationSchema } from "../../models/Recipes";
 
 const yup = require("yup");
-
-export const validateIfExistRecipeInDB = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const recipeService = new RecipeService();
-    const response: IRecipes = await recipeService.findOneByTitle(req.body.title);
-
-    if (response) {
-      throw new Error("The Recipe already exist in db.");
-    }
-
-    next();
-  } catch (error) {
-    res.status(409).json({ error: "The Recipe already exist in db." });
-  }
-};
 
 export const validateRecipesData = async (
   req: Request,

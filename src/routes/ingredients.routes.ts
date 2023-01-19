@@ -3,8 +3,7 @@ const router = Router();
 
 import * as ingredientsController from "../controllers/ingredients.controller";
 import {
-  validateIfExistIngredientInDB,
-  validateIngredientsData,
+  validateIngredientsData
 } from "../middlewares/ingredients/validations.middleware";
 
 router.get("/ingredients/findAll", ingredientsController.findAll);
