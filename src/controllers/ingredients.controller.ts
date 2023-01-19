@@ -26,7 +26,12 @@ export const save = async (req: Request, res: Response) => {
     const ingredientSaved = await ingredientService.save(ingredient);
     res.status(201).json(ingredientSaved);
   } catch (error) {
-    res.status(400).json({ error });
+    if (error instanceof Error) {
+      const err = error as Error;
+      res.status(412).json({ error: err.message });
+    } else {
+      res.status(500).json("Error");
+    }
   }
 };
 
@@ -38,7 +43,12 @@ export const partialUpdate = async (req: Request, res: Response) => {
     );
     res.status(200).json(ingredientUpdated);
   } catch (error) {
-    res.status(400).json({ error });
+    if (error instanceof Error) {
+      const err = error as Error;
+      res.status(412).json({ error: err.message });
+    } else {
+      res.status(500).json("Error");
+    }
   }
 };
 

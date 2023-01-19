@@ -11,7 +11,6 @@ router.get("/ingredients/findAll", ingredientsController.findAll);
 router.post(
   "/ingredients/save",
   validateIngredientsData,
-  validateIfExistIngredientInDB,
   ingredientsController.save
 );
 router.patch(

@@ -42,6 +42,12 @@ export class RecipeService {
   };
 
   save = async (recipe: IRecipes) => {
+    const recipeByTitleResponse = await this.findOneByTitle(recipe.title);
+    
+    if (recipeByTitleResponse) {
+      throw new Error("The Recipe already exist in db.");
+    }
+
     return await recipe.save();
   };
 

@@ -14,12 +14,7 @@ router.get(
   validateIfExistParamTitle,
   recipesController.findOneByTitle
 );
-router.post(
-  "/recipes/save",
-  validateRecipesData,
-  validateIfExistRecipeInDB,
-  recipesController.save
-);
+router.post("/recipes/save", validateRecipesData, recipesController.save);
 router.patch("/recipes/:id/partialUpdate", recipesController.partialUpdate);
 router.delete("/recipes/:id/delete", recipesController.deleteOne);
 

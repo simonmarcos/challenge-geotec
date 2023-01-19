@@ -11,23 +11,30 @@ export class IngredientsService {
     );
   };
 
-  findOneByTitle = async (title: string = ""): Promise<IIngredient> => {
+  findOneByTitle = async (name: string = ""): Promise<IIngredient> => {
     return await Ingredient.findOne({
-      title: title,
+      name: name,
     });
   };
 
-  save = async (Ingredient: IIngredient) => {
-    return await Ingredient.save();
+  save = async (ingredient: IIngredient) => {
+    const ingredientsByTitleResponse = await this.findOneByTitle(
+      ingredient.name
+    );
+    if (ingredientsByTitleResponse) {
+      throw new Error("The Ingredient already exist in db.");
+    }
+
+    return await ingredient.save();
   };
 
-  partialupdate = async (IngredientId: string, data: IIngredient) => {
-    return await Ingredient.findByIdAndUpdate({ _id: IngredientId }, data, {
+  partialupdate = async (ingredientId: string, data: IIngredient) => {
+    return await Ingredient.findByIdAndUpdate({ _id: ingredientId }, data, {
       new: true,
     });
   };
 
-  deleteOne = async (IngredientId: string) => {
-    await Ingredient.findByIdAndRemove(IngredientId);
+  deleteOne = async (ingredientId: string) => {
+    await Ingredient.findByIdAndRemove(ingredientId);
   };
 }
