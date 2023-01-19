@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   IRecipesSpoonacularDTO,
   IRecipesSpoonacularResponseDTO,
-} from "../model/Recipes";
+} from "../model/RecipesSpoonacular";
 import { builApiUrlWithEntity } from "../utils";
 
 export class RecipesSpoonacularService {

@@ -1,8 +1,8 @@
 import { PAGINATION_OPTIONS } from "../config/config";
 import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
-import { IRecipesSpoonacularDTO } from "../spoonacular/model/Recipes";
-import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSnoopcular.service";
+import { IRecipesSpoonacularDTO } from "../spoonacular/model/RecipesSpoonacular";
+import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSpoonacular.service";
 
 export class RecipeService {
   findAll = async (limit: number) => {
@@ -22,12 +22,12 @@ export class RecipeService {
     if (numberOfRecipes < 100) {
       try {
         const recipesSpoonacularService = new RecipesSpoonacularService();
-        const recipesSpoonacularReponse: IRecipesSpoonacularDTO[] =
+        const recipesReponseFromSpoonacular =
           await recipesSpoonacularService.getRecipes(
             defaultValueLimit - numberOfRecipes
           );
-        console.warn("ESS ", recipesSpoonacularReponse);
-        finalResponse.push(recipesSpoonacularReponse);
+
+        finalResponse.push(recipesReponseFromSpoonacular);
       } catch (error) {
         console.warn("EASD ", error);
       }
