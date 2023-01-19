@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 - **npm run dev**
 - The server should now be running on http://localhost:3000
 
-##API Endpoints
+## API Endpoints
 The following endpoints are available in the API:
 
 - GET /api/recipes/:id/findAll: Retrieve a specific recipes by id
