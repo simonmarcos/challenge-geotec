@@ -5,9 +5,9 @@ import { RecipeService } from "../service/recipes.service";
 const recipeService = new RecipeService();
 
 export const findAll = async (req: Request, res: Response) => {
-  const page: number = Number(req.query.page);
+  const limit: number = Number(req.query.limit);
 
-  const recipesResponse = await recipeService.findAll(page);
+  const recipesResponse = await recipeService.findAll(limit);
   res.json(recipesResponse);
 };
 
