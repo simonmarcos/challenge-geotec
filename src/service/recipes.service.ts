@@ -1,7 +1,7 @@
 import { PAGINATION_OPTIONS } from "../config/config";
 import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
-import { IRecipesSpoonacular } from "../spoonacular/model/Recipes";
+import { IRecipesSpoonacularDTO } from "../spoonacular/model/Recipes";
 import { RecipesSpoonacularService } from "../spoonacular/service/RecipesSnoopcular.service";
 
 export class RecipeService {
@@ -22,7 +22,7 @@ export class RecipeService {
     if (numberOfRecipes < 100) {
       try {
         const recipesSpoonacularService = new RecipesSpoonacularService();
-        const recipesSpoonacularReponse: IRecipesSpoonacular[] =
+        const recipesSpoonacularReponse: IRecipesSpoonacularDTO[] =
           await recipesSpoonacularService.getRecipes(
             defaultValueLimit - numberOfRecipes
           );

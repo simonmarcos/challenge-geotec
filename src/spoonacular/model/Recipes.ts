@@ -1,13 +1,13 @@
-export interface IRecipesSpoonacularResponse {
-  data: IRecipesSpoonacularData;
+export interface IRecipesSpoonacularResponseDTO {
+  data: IRecipesSpoonacularDataDTO;
   offset: number;
   number: number;
   totalResults: number;
 }
-interface IRecipesSpoonacularData {
-  results: IRecipesSpoonacular[];
+interface IRecipesSpoonacularDataDTO {
+  results: IRecipesSpoonacularDTO[];
 }
-export interface IRecipesSpoonacular {
+export interface IRecipesSpoonacularDTO {
   _id: number;
   title: string;
   image: string;

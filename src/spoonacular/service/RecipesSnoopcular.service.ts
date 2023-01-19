@@ -1,16 +1,16 @@
 import axios from "axios";
 import {
-  IRecipesSpoonacular,
-  IRecipesSpoonacularResponse,
+  IRecipesSpoonacularDTO,
+  IRecipesSpoonacularResponseDTO,
 } from "../model/Recipes";
 import { builApiUrlWithEntity } from "../utils";
 
 export class RecipesSpoonacularService {
-  getRecipes = async (size: number): Promise<IRecipesSpoonacular[]> => {
+  getRecipes = async (size: number): Promise<IRecipesSpoonacularDTO[]> => {
     try {
       const FINAL_URL = `${builApiUrlWithEntity("recipes")}&number=${size}`;
 
-      const recipesResponse: IRecipesSpoonacularResponse = await axios.get(
+      const recipesResponse: IRecipesSpoonacularResponseDTO = await axios.get(
         FINAL_URL
       );
 
