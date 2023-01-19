@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { PAGINATION_OPTIONS } from "../config/config";
 import { SpoonacularError } from "../exceptions/SpoonacularExceptions";
 import { IRecipesDTO } from "../models/dto/RecipesDTO";
@@ -6,7 +5,7 @@ import { IPaginateResult } from "../models/Paginate";
 import { IRecipes, Recipes } from "../models/Recipes";
 import {
   IRecipesSpoonacularDTO,
-  IRecipesSpoonacularResponse,
+  IRecipesSpoonacularResponse
 } from "../spoonacular/model/RecipesSpoonacular";
 import { RecipesSpoonacularService } from "../spoonacular/service/recipesSpoonacular.service";
 import { convertListRecipesResponseDataToDTO } from "../spoonacular/utils/convertData";
